@@ -1,66 +1,42 @@
-// In this file we have functions that will be used in the Engine.js file.
-// nextEnemySpot is a variable that refers to a function. The function has one parameter,
-// which we called enemies. enemies will refer to an array that will contain instances of the
-// Enemy class. To get more information about the argument that will get passed to this function,
-// please see the Engine.js file.
+// functions to be used in the engine.js file
 
-// The purpose of this function is to determine in which slot to place our next enemy.
-// The possibilities are 0, 1, 2, 3 or 4.
+// determines slot for next enemy [0, 1, 2, 3, or 4]
 const nextEnemySpot = (enemies) => {
-  // enemySpots will refer to the number of spots available (can you calculate it?)
+  // determines # of x-pos gradations by dividing game board by enemy width
   const enemySpots = GAME_WIDTH / ENEMY_WIDTH;
-
-  // To find out where to place an enemy, we first need to find out which are the spots available.
-  // We don't want to place two enemies in the same lane. To accomplish this, we first create an
-  // array with 5 elements (why 5?) and each element is false.
-  // We then use forEach to iterate through all the enemies.
-  // If you look at the constructor of the Enemy class, you can see that every instance will have a spot property.
-  // We can use this property to modify the spotsTaken array.
+  // to avoid placing 2 enemies in same lane, determines which spots available
+  // by creating array of 5 false elements, then iterating through enemies array with forEach
+  // every enemy instance has an spot property w/ which we can use to modify spotsTaken array
   const spotsTaken = [false, false, false, false, false];
   enemies.forEach((enemy) => {
     spotsTaken[enemy.spot] = true;
   });
 
-  // We are now in a position to find out position. We declare a variable candidate that is initially undefined.
-  // candidate represents a potential spot. The variable will be repeatedly assigned different numbers.
-  // We will randomly try different spots until we find out that is available
-  let candidate = undefined;
+  let candidate = undefined; // declare variable 'candidate' to store randomly checked spot
+  // while a candidate is undefined or || candidate spot taken === true
   while (candidate === undefined || spotsTaken[candidate]) {
-    // candidate is assigned a random number between 0 and enemySpots (not including enemySpots). (what number is enemySpots?)
-    candidate = Math.floor(Math.random() * enemySpots);
+    // assigns candidate a # between 0 & value of enemySpots, rounded down w/ Math.floor
+    candidate = Math.floor(Math.random() * enemySpots); // # maxes out at 1 less than enemySpots
   }
-
-  // When the while loop is finished, we are assured that we have a number that corresponds to a free spot, so we return it.
-  return candidate;
+  return candidate; // returns number corresponding to free spot
 };
 
-// addBackground contains all the logic to display the starry background of the game.
-// It is a variable that refers to a function.
-// The function takes one parameter
-// The parameter represents the DOM node to which we will add the background
+// function that displays game play area, argument is a DOM node
 const addBackground = (root) => {
-  // We create a new img DOM node.
-  const bg = document.createElement('img');
+  const bg = document.createElement("img"); // creates img DOM node
+  bg.src = "images/stars.png"; // sets game bg img src
+  bg.style.height = `${GAME_HEIGHT}px`; // sets game bg height
+  bg.style.width = `${GAME_WIDTH}px`; // sets game bg width
+  root.append(bg); // appends bg to root of DOM node
 
-  // We set its src attribute and the height and width CSS attributes
-  bg.src = 'images/stars.png';
-  bg.style.height = `${GAME_HEIGHT}px`;
-  bg.style.width = `${GAME_WIDTH}px`;
-
-  // We add it to the root DOM node
-  root.append(bg);
-
-  // We don't want the enemies to go beyond the lower edge of the image
-  // so we place a white div to hide the enemies after they reach the bottom.
-  // To see what it does, you can comment out all the remaining lines in the function to see the effect.
-  const whiteBox = document.createElement('div');
-
-  // We put a high z-index so that the div is placed over all other DOM nodes
+  // creates a white box beneath gameplay area with crazy high Z index
+  // so that enemies disappear behind it as they pass the edge of gameplay area
+  const whiteBox = document.createElement("div");
   whiteBox.style.zIndex = 100;
-  whiteBox.style.position = 'absolute';
+  whiteBox.style.position = "absolute";
   whiteBox.style.top = `${GAME_HEIGHT}px`;
   whiteBox.style.height = `${ENEMY_HEIGHT}px`;
   whiteBox.style.width = `${GAME_WIDTH}px`;
-  whiteBox.style.background = '#fff';
+  whiteBox.style.background = "#fff";
   root.append(whiteBox);
 };
