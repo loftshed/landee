@@ -20,6 +20,7 @@ class Text {
     div.style.transform = "translateX(-50%) translateY(-53.8%)";
     div.style.textAlign = "center";
     div.style.width = GAME_WIDTH;
+    div.id = "text-alert";
 
     root.appendChild(div);
 

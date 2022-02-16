@@ -17,4 +17,4 @@ const keydownHandler = (event) => {
 
 document.addEventListener("keydown", keydownHandler);
 
-gameEngine.gameLoop();
+gameEngine.firstRun();

@@ -6,20 +6,31 @@ class Engine {
     this.root = theRoot; // stores reference to root
     this.player = new Player(this.root); // creates player in root, see player.js
     this.enemies = []; // sets this.enemies to blank array
-    this.firstRun = true;
     addBackground(this.root); // adds background image
   }
+
+  firstRun = () => {
+    const playerChar = document.getElementById("player-character");
+    const textAlert = new Text(this.root, "50%", "50%");
+    textAlert.update(`PRESS ANY KEY \n TO START`);
+    playerChar.style.display = "none";
+    document.addEventListener("keydown", this.gameLoop);
+  };
+
   // main game loop: updates enemy pos, detects collisions, removes enemies
   gameLoop = () => {
-    // if (this.firstRun === true) {
-    // } else {
+    const textAlertNode = document.getElementById("text-alert");
+    const playerChar = document.getElementById("player-character");
+    const textAlert = new Text(this.root, "50%", "50%");
+    this.root.removeChild(textAlertNode);
 
-    // }
-
-    this.firstRun = false;
     if (this.lastFrame === undefined) {
-      this.lastFrame = new Date().getTime(); // records curr. time to this.lastFrame (as # of milliseconds since midnight jan 1. 1970)
+      this.lastFrame = new Date().getTime();
     }
+
+    playerChar.style.display = "inline";
+
+    ////////////////////////////
     let timeDiff = new Date().getTime() - this.lastFrame;
     this.lastFrame = new Date().getTime();
     // uses # of milliseconds since run of gameLoop() to update enemy pos
@@ -38,13 +49,11 @@ class Engine {
     if (this.isPlayerDead()) {
       const gameAreaOverlay = document.getElementById("game-area-overlay");
       const gameAreaOverlay2 = document.getElementById("game-area-overlay2");
-      const playerChar = document.getElementById("player-character");
-      const gameOverAlert = new Text(this.root, "50%", "50%");
-      console.log(playerChar);
+
       document.removeEventListener("keydown", keydownHandler);
       playerChar.classList.add("death-anim");
       setTimeout(() => {
-        gameOverAlert.update("GAME OVER");
+        textAlert.update("GAME OVER");
         setTimeout(() => {
           gameAreaOverlay.style.opacity = "100%";
           gameAreaOverlay2.style.display = "inline";
@@ -58,16 +67,13 @@ class Engine {
             }, 1000);
           }, 1000);
         }, 2000);
-      }, 1000);
-
-      // window.alert("Game over");
+      }, 500);
       return;
     }
 
     setTimeout(this.gameLoop, 20); // if player still alive, run another game loop in 20 ms
   };
-  // determines if player is ded
-  // if this function returns 'true' gameLoop will end
+
   isPlayerDead = () => {
     let playerDead;
     // function to determine if player ded based exclusively x/y coords, no hitbox
