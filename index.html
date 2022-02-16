@@ -1,9 +1,19 @@
 <html>
   <head>
     <title>Nyan Kat</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div id="app"></div>
+    <div class="page-container">
+      <div id="page-background"></div>
+      <div id="game-area-overlay" class="absolute-center"></div>
+      <img src="assets/tv.png" id="png-border" />
+      <div id="game-border" class="absolute-center"></div>
+      <div id="game-container" class="absolute-center">
+        <div id="app"></div>
+      </div>
+    </div>
+    <img src="assets/table.png" id="table" />
     <script src="js/data.js"></script>
     <script src="js/Enemy.js"></script>
     <script src="js/engine-utilities.js"></script>

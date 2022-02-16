@@ -23,20 +23,21 @@ const nextEnemySpot = (enemies) => {
 
 // function that displays game play area, argument is a DOM node
 const addBackground = (root) => {
+  const gameBorder = document.getElementById("game-border");
+  const pngBorder = document.getElementById("png-border");
+  const gameAreaOverlay = document.getElementById("game-area-overlay");
   const bg = document.createElement("img"); // creates img DOM node
-  bg.src = "images/stars.png"; // sets game bg img src
+
+  bg.src = "assets/bg.png"; // sets game bg img src
   bg.style.height = `${GAME_HEIGHT}px`; // sets game bg height
   bg.style.width = `${GAME_WIDTH}px`; // sets game bg width
   root.append(bg); // appends bg to root of DOM node
 
-  // creates a white box beneath gameplay area with crazy high Z index
-  // so that enemies disappear behind it as they pass the edge of gameplay area
-  const whiteBox = document.createElement("div");
-  whiteBox.style.zIndex = 100;
-  whiteBox.style.position = "absolute";
-  whiteBox.style.top = `${GAME_HEIGHT}px`;
-  whiteBox.style.height = `${ENEMY_HEIGHT}px`;
-  whiteBox.style.width = `${GAME_WIDTH}px`;
-  whiteBox.style.background = "#fff";
-  root.append(whiteBox);
+  // sets game border height and width to size of gameplay area
+  // for easier fuckwithability
+  pngBorder.style.width = `${GAME_WIDTH * 1.35}px`;
+  gameBorder.style.height = `${GAME_HEIGHT}px`;
+  gameBorder.style.width = `${GAME_WIDTH}px`;
+  gameAreaOverlay.style.width = `${GAME_WIDTH}px`;
+  gameAreaOverlay.style.height = `${GAME_HEIGHT}px`;
 };

@@ -1,4 +1,7 @@
 // probably to bring up a game over message and a start again button
+
+const gameOver = new Text();
+
 class Text {
   // takes page root & desired x/y pos
   constructor(root, xPos, yPos) {

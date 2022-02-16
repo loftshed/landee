@@ -22,6 +22,7 @@ class Player {
       this.x = this.x - PLAYER_WIDTH;
     }
     this.domElement.style.left = `${this.x}px`;
+    this.domElement.style.transform = "scaleX(-1)";
   }
 
   // function to move player left by adding player width to current l-pos
@@ -30,5 +31,6 @@ class Player {
       this.x = this.x + PLAYER_WIDTH;
     }
     this.domElement.style.left = `${this.x}px`;
+    this.domElement.style.transform = "";
   }
 }
