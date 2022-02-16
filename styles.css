@@ -8,19 +8,17 @@ body {
   position: absolute;
   left: 50%;
   top: 37.5%;
-  transform: translateX(-60.8%) translateY(-53%);
+  transform: translateX(-63.7%) translateY(-53.8%);
 }
 
-#table {
+.table {
   position: absolute;
   z-index: -3;
-  left: 50%;
-  top: 60%;
-  transform: translateX(-50%);
+  transform: translateX(-590px) translateY(285px);
   filter: blur(1px);
 }
 
-#game-border {
+.game-border {
   width: 100vw;
   height: 100vh;
   background: transparent;
@@ -29,7 +27,7 @@ body {
   z-index: -5;
 }
 
-#png-border {
+.png-border {
   z-index: 100;
   position: absolute;
   left: 50%;
@@ -38,26 +36,47 @@ body {
   filter: blur(1px);
 }
 
-#game-area-overlay {
+.game-area-overlay {
+  transition: all ease 0.3s;
   background-image: repeating-radial-gradient(
     circle at 17% 32%,
     white,
     black 0.00085px
   );
-  filter: blur(3px);
-  z-index: 95;
+  filter: blur(3px) sepia(50%);
+  z-index: 96;
   animation: tv-static 5s linear infinite;
   opacity: 35%;
+}
+
+.game-area-overlay2 {
+  display: none;
+  background-color: #151618;
+  box-shadow: inset 0px 0px 800px 100px rgb(102, 102, 102);
+  z-index: 95;
+  size: 800;
 }
 
 .page-container {
   max-height: 100vh;
 }
 
-#page-background {
+.page-background {
   position: absolute;
   z-index: 0;
   background-color: aquamarine;
+}
+
+.death-anim {
+  animation: death-anim 0.8s forwards ease-in;
+}
+
+@keyframes death-anim {
+  0% {
+  }
+  100% {
+    transform: rotateZ(-100deg) translateX(-110px);
+  }
 }
 
 @keyframes tv-static {

@@ -3,7 +3,7 @@ class Player {
   constructor(root) {
     // ^^ the parent DOM node
     // establishes initial x pos (dist. from left margin) and stores it in player class
-    this.x = 5 * PLAYER_WIDTH;
+    this.x = 4 * PLAYER_WIDTH;
     // establishes initial y pos (always remains the same in default game config)
     const y = GAME_HEIGHT - PLAYER_HEIGHT - 10; // y pos is distance from top margin
     // creates a DOM node and assigns it properties
@@ -13,6 +13,7 @@ class Player {
     this.domElement.style.left = `${this.x}px`;
     this.domElement.style.top = ` ${y}px`;
     this.domElement.style.zIndex = "10";
+    this.domElement.id = "player-character";
     root.appendChild(this.domElement);
   }
 

@@ -7,7 +7,7 @@ const nextEnemySpot = (enemies) => {
   // to avoid placing 2 enemies in same lane, determines which spots available
   // by creating array of 5 false elements, then iterating through enemies array with forEach
   // every enemy instance has an spot property w/ which we can use to modify spotsTaken array
-  const spotsTaken = [false, false, false, false, false];
+  const spotsTaken = [false, false, false, false, false, false, false, false];
   enemies.forEach((enemy) => {
     spotsTaken[enemy.spot] = true;
   });
@@ -26,6 +26,7 @@ const addBackground = (root) => {
   const gameBorder = document.getElementById("game-border");
   const pngBorder = document.getElementById("png-border");
   const gameAreaOverlay = document.getElementById("game-area-overlay");
+  const gameAreaOverlay2 = document.getElementById("game-area-overlay2");
   const bg = document.createElement("img"); // creates img DOM node
 
   bg.src = "assets/bg.png"; // sets game bg img src
@@ -35,9 +36,11 @@ const addBackground = (root) => {
 
   // sets game border height and width to size of gameplay area
   // for easier fuckwithability
-  pngBorder.style.width = `${GAME_WIDTH * 1.35}px`;
+  pngBorder.style.width = `${GAME_WIDTH * 1.41}px`;
   gameBorder.style.height = `${GAME_HEIGHT}px`;
   gameBorder.style.width = `${GAME_WIDTH}px`;
   gameAreaOverlay.style.width = `${GAME_WIDTH}px`;
   gameAreaOverlay.style.height = `${GAME_HEIGHT}px`;
+  gameAreaOverlay2.style.width = `${GAME_WIDTH}px`;
+  gameAreaOverlay2.style.height = `${GAME_HEIGHT}px`;
 };

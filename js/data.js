@@ -1,5 +1,5 @@
 // size of the game area in pixels (used in engine-utilities.js)
-const GAME_WIDTH = 825;
+const GAME_WIDTH = 800;
 const GAME_HEIGHT = 626;
 
 // height/width/max # of enemies

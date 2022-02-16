@@ -1,4 +1,5 @@
 // creates a new instance of engine class with id "app"
+
 const gameEngine = new Engine(document.getElementById("app"));
 
 // tells the game what to do when keydown event is detected
@@ -13,7 +14,7 @@ const keydownHandler = (event) => {
 };
 
 // add event listener
+
 document.addEventListener("keydown", keydownHandler);
 
-// starts the game
 gameEngine.gameLoop();

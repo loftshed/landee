@@ -1,21 +1,33 @@
 <html>
   <head>
-    <title>Nyan Kat</title>
+    <title>LANDEE</title>
     <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div class="page-container">
-      <div id="page-background"></div>
-      <div id="game-area-overlay" class="absolute-center"></div>
-      <img src="assets/tv.png" id="png-border" />
-      <div id="game-border" class="absolute-center"></div>
+      <div id="page-background" class="page-background"></div>
+      <div
+        id="game-area-overlay"
+        class="absolute-center game-area-overlay"
+      ></div>
+      <div
+        id="game-area-overlay2"
+        class="absolute-center game-area-overlay2"
+      ></div>
+      <img src="assets/tv.png" class="png-border" id="png-border" />
+      <div id="game-border" class="game-border absolute-center"></div>
       <div id="game-container" class="absolute-center">
         <div id="app"></div>
       </div>
     </div>
-    <img src="assets/table.png" id="table" />
+    <img src="assets/table.png" id="table" class="table absolute-center" />
     <script src="js/data.js"></script>
     <script src="js/Enemy.js"></script>
+    <script src="js/Text.js"></script>
     <script src="js/engine-utilities.js"></script>
     <script src="js/Engine.js"></script>
     <script src="js/Player.js"></script>
