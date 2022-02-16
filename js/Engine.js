@@ -6,30 +6,28 @@ class Engine {
     this.root = theRoot; // stores reference to root
     this.player = new Player(this.root); // creates player in root, see player.js
     this.enemies = []; // sets this.enemies to blank array
+    this.extraLives = 3;
+    this.playerChar = document.getElementById("player-character");
     addBackground(this.root); // adds background image
   }
 
   firstRun = () => {
-    const playerChar = document.getElementById("player-character");
     const textAlert = new Text(this.root, "50%", "50%");
     textAlert.update(`PRESS ANY KEY \n TO START`);
-    playerChar.style.display = "none";
+    this.playerChar.style.display = "none";
     document.addEventListener("keydown", this.gameLoop);
   };
 
   // main game loop: updates enemy pos, detects collisions, removes enemies
   gameLoop = () => {
     const textAlertNode = document.getElementById("text-alert");
-    const playerChar = document.getElementById("player-character");
     const textAlert = new Text(this.root, "50%", "50%");
     this.root.removeChild(textAlertNode);
 
     if (this.lastFrame === undefined) {
       this.lastFrame = new Date().getTime();
     }
-
-    playerChar.style.display = "inline";
-
+    this.playerChar.style.display = "inline";
     ////////////////////////////
     let timeDiff = new Date().getTime() - this.lastFrame;
     this.lastFrame = new Date().getTime();
@@ -49,28 +47,35 @@ class Engine {
     if (this.isPlayerDead()) {
       const gameAreaOverlay = document.getElementById("game-area-overlay");
       const gameAreaOverlay2 = document.getElementById("game-area-overlay2");
+      document.removeEventListener("keydown", this.gameLoop);
+      this.playerChar.classList.add("death-anim");
 
-      document.removeEventListener("keydown", keydownHandler);
-      playerChar.classList.add("death-anim");
-      setTimeout(() => {
-        textAlert.update("GAME OVER");
+      if (this.extraLives > 0) {
         setTimeout(() => {
-          gameAreaOverlay.style.opacity = "100%";
-          gameAreaOverlay2.style.display = "inline";
+          textAlert.update("PLAY AGAIN?");
+        }, 500);
+        document.addEventListener("keydown", this.playAgain);
+        return;
+      } else if (this.extraLives === 0) {
+        setTimeout(() => {
+          textAlert.update("GAME OVER");
           setTimeout(() => {
-            gameAreaOverlay.style.transform =
-              "scale(0.1) translatex(-637%) translatey(-538%)";
-            gameAreaOverlay.style.borderRadius = "25%";
-            gameAreaOverlay.style.filter = "blur(1px) brightness: 5000%";
+            gameAreaOverlay.style.opacity = "100%";
+            gameAreaOverlay2.style.display = "inline";
             setTimeout(() => {
-              gameAreaOverlay.style.opacity = "0%";
+              gameAreaOverlay.style.transform =
+                "scale(0.1) translatex(-637%) translatey(-538%)";
+              gameAreaOverlay.style.borderRadius = "25%";
+              gameAreaOverlay.style.filter = "blur(1px) brightness: 5000%";
+              setTimeout(() => {
+                gameAreaOverlay.style.opacity = "0%";
+              }, 1000);
             }, 1000);
-          }, 1000);
-        }, 2000);
-      }, 500);
-      return;
+          }, 2000);
+        }, 500);
+        return;
+      }
     }
-
     setTimeout(this.gameLoop, 20); // if player still alive, run another game loop in 20 ms
   };
 
@@ -86,5 +91,13 @@ class Engine {
       }
     });
     return playerDead;
+  };
+
+  playAgain = () => {
+    document.removeEventListener("keydown", this.playAgain);
+    console.log(this.extraLives);
+    this.extraLives = this.extraLives - 1;
+    this.playerChar.classList.remove("death-anim");
+    this.gameLoop();
   };
 }
