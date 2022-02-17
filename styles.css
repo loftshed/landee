@@ -106,6 +106,17 @@ body {
   }
 }
 
+.blink-text {
+  transition: none;
+  animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+  50% {
+    color: rgb(214, 5, 197);
+  }
+}
+
 @keyframes tv-static {
   from {
     background-size: 100% 100%;

@@ -29,9 +29,10 @@ const addBackground = (root) => {
   // const gameAreaOverlay2 = document.getElementById("game-area-overlay2");
   const bg = document.createElement("img"); // creates img DOM node
 
-  bg.src = "assets/bg.png"; // sets game bg img src
+  bg.src = "assets/title.png"; // sets game bg img src
   bg.style.height = `${GAME_HEIGHT}px`; // sets game bg height
   bg.style.width = `${GAME_WIDTH}px`; // sets game bg width
+  bg.id = "game-bg";
   root.append(bg); // appends bg to root of DOM node
 
   // sets game border height and width to size of gameplay area

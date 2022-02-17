@@ -10,11 +10,13 @@ class Engine {
     this.playerChar = document.getElementById("player-character");
     ///below are sounds
     this.gameTheme = document.getElementById("game-theme");
+    this.titleTheme = document.getElementById("title-theme");
     this.tvStatic = document.getElementById("tv-static");
     this.tvOn = document.getElementById("tv-static");
     this.deathSnd = document.getElementById("death-sound");
     this.gameOver = document.getElementById("game-over");
     this.replay = document.getElementById("replay");
+    this.start = document.getElementById("start");
 
     //svg mask for remote control & tv overlays
     this.remoteMask = document.getElementById("remote-mask");
@@ -29,20 +31,29 @@ class Engine {
   };
 
   firstRun = () => {
-    this.gameTheme.play();
-    this.gameTheme.volume = 0;
-    const textAlert = new Text(this.root, "50%", "50%");
+    this.titleTheme.volume = 0.5;
+    this.titleTheme.play();
+    const textAlert = new Text(this.root, "50%", "86%");
+    const textAlertNode = document.getElementById("text-alert");
     textAlert.update(`PRESS ANY KEY\nTO START`);
+
+    textAlertNode.classList.add("blink-text");
+
     this.playerChar.style.display = "none";
     document.addEventListener("keydown", this.gameLoop);
   };
 
   // main game loop: updates enemy pos, detects collisions, removes enemies
   gameLoop = () => {
+    const gameBg = document.getElementById("game-bg");
     const textAlertNode = document.getElementById("text-alert");
     const textAlert = new Text(this.root, "50%", "50%");
-
+    gameBg.src = "assets/bg.png";
+    this.titleTheme.pause();
+    this.start.volume = 0.2;
+    this.start.play();
     this.root.removeChild(textAlertNode);
+    this.gameTheme.play();
     this.gameTheme.volume = 0.5;
 
     if (this.lastFrame === undefined) {
