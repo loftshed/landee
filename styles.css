@@ -1,7 +1,7 @@
 body {
   margin: 0;
   display: flex;
-  background-color: #adb5bd;
+  background-color: #355070;
   user-select: none;
 }
 
@@ -21,20 +21,30 @@ body {
 
 .remote {
   transform: translateX(300px) translateY(425px);
+  z-index: 100;
+  pointer-events: none;
 }
 
 .remote-mask {
   width: 380;
   transform: translateX(300px) translateY(425px);
-  z-index: 1000;
-  opacity: 0;
+  z-index: 0;
+}
+
+.remote-mask:hover {
+  filter: drop-shadow(0px 0px 100px rgb(214, 5, 197));
+  animation: mask-pulse 1s infinite ease;
+}
+
+.mask-pulse {
+  animation: mask-pulse 3s infinite ease;
 }
 
 .game-border {
   width: 100vw;
   height: 100vh;
   background: transparent;
-  border: solid 160px #adb5bd;
+  border: solid 160px #355070;
   border-radius: 15px;
   z-index: -5;
 }
@@ -48,8 +58,8 @@ body {
   filter: blur(1px);
 }
 
-.info-overlay {
-}
+/* .info-overlay {
+} */
 
 .game-area-overlay {
   transition: all ease 0.3s;
@@ -70,6 +80,8 @@ body {
   box-shadow: inset 0px 0px 800px 100px rgb(102, 102, 102);
   z-index: 95;
   size: 800;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .page-container {
@@ -100,5 +112,15 @@ body {
   }
   to {
     background-size: 200% 200%;
+  }
+}
+
+@keyframes mask-pulse {
+  0% {
+  }
+  50% {
+    filter: drop-shadow(0px 0px 100px rgb(255, 217, 0));
+  }
+  100% {
   }
 }

@@ -7,14 +7,23 @@ class Engine {
     this.player = new Player(this.root); // creates player in root, see player.js
     this.enemies = []; // sets this.enemies to blank array
     this.extraLives = 3;
-    this.gameAreaOverlay = document.getElementById("game-area-overlay");
-    this.gameAreaOverlay2 = document.getElementById("game-area-overlay2");
     this.playerChar = document.getElementById("player-character");
+    ///below are sounds
     this.gameTheme = document.getElementById("game-theme");
     this.tvStatic = document.getElementById("tv-static");
     this.tvOn = document.getElementById("tv-static");
+
+    //svg mask for remote control & tv overlays
+    this.remoteMask = document.getElementById("remote-mask");
+    this.gameAreaOverlay = document.getElementById("game-area-overlay");
+    this.gameAreaOverlay2 = document.getElementById("game-area-overlay2");
     addBackground(this.root); // adds background image
   }
+
+  turnOn = () => {
+    // this.remoteMask.classList.remove("mask-pulse");
+    this.firstRun();
+  };
 
   firstRun = () => {
     this.gameTheme.play();
@@ -29,6 +38,7 @@ class Engine {
   gameLoop = () => {
     const textAlertNode = document.getElementById("text-alert");
     const textAlert = new Text(this.root, "50%", "50%");
+
     this.root.removeChild(textAlertNode);
     this.gameTheme.volume = 0.3;
 
@@ -78,14 +88,20 @@ class Engine {
       } else if (this.extraLives === 0) {
         document.removeEventListener("keydown", keydownHandler);
         setTimeout(() => {
+          this.gameAreaOverlay.style.transition = "all ease 0.3s";
           this.gameTheme.volume = 0.1;
           textAlert.update("GAME OVER");
+
           setTimeout(() => {
             this.gameTheme.volume = 0;
             this.tvStatic.play();
             this.tvStatic.volume = 0.3;
+            this.gameAreaOverlay.style.zIndex = "96";
+            this.gameAreaOverlay2.style.zIndex = "95";
             this.gameAreaOverlay.style.opacity = "100%";
-            this.gameAreaOverlay2.style.background = "";
+            this.gameAreaOverlay2.style.boxShadow =
+              "inset 0px 0px 800px 100px rgb(102, 102, 102)";
+            this.gameAreaOverlay2.style.backgroundImage = "";
             this.gameAreaOverlay2.style.display = "inline";
             setTimeout(() => {
               this.gameAreaOverlay.style.transform =
@@ -100,8 +116,10 @@ class Engine {
                 }
               }, 2);
               this.tvStatic.volume = 0;
+              this.tvStatic.pause();
               setTimeout(() => {
                 this.gameAreaOverlay.style.opacity = "0%";
+                this.remoteMask.addEventListener("click", this.refreshPage);
               }, 1000);
             }, 3000);
           }, 2000);
@@ -110,6 +128,11 @@ class Engine {
       }
     }
     setTimeout(this.gameLoop, 20); // if player still alive, run another game loop in 20 ms
+  };
+
+  // no time for a better restart sequence, maybe lata!!!
+  refreshPage = () => {
+    location.reload();
   };
 
   isPlayerDead = () => {
