@@ -25,6 +25,10 @@ body {
   pointer-events: none;
 }
 
+/* .remote:active {
+  animation: jiggle 0.5s linear ease;
+} */
+
 .remote-mask {
   width: 380;
   transform: translateX(300px) translateY(425px);
@@ -102,7 +106,7 @@ body {
   0% {
   }
   100% {
-    transform: rotateZ(-100deg) translateX(-110px);
+    transform: rotate(-100deg) translateX(-110px);
   }
 }
 
@@ -125,6 +129,18 @@ body {
     background-size: 200% 200%;
   }
 }
+/* 
+@keyframes jiggle {
+  0% {
+    transform: rotate(-15deg);
+  }
+  50% {
+    transform: rotate(15deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+} */
 
 @keyframes mask-pulse {
   0% {
