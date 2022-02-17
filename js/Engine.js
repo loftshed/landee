@@ -13,7 +13,7 @@ class Engine {
 
   firstRun = () => {
     const textAlert = new Text(this.root, "50%", "50%");
-    textAlert.update(`PRESS ANY KEY \n TO START`);
+    textAlert.update(`PRESS ANY KEY\nTO START`);
     this.playerChar.style.display = "none";
     document.addEventListener("keydown", this.gameLoop);
   };
@@ -51,12 +51,23 @@ class Engine {
       this.playerChar.classList.add("death-anim");
 
       if (this.extraLives > 0) {
+        document.removeEventListener("keydown", keydownHandler);
         setTimeout(() => {
-          textAlert.update("PLAY AGAIN?");
+          if (this.extraLives > 1) {
+            textAlert.update(
+              `U DED.\n${this.extraLives} LIVES REMAINING\n\nPRESS ANY KEY TO\nSTART NEXT ROUND`
+            );
+          } else {
+            textAlert.update(
+              `U DED.\n${this.extraLives} LIFE REMAINING\n\nPRESS ANY KEY TO\nSTART NEXT ROUND`
+            );
+          }
         }, 500);
+
         document.addEventListener("keydown", this.playAgain);
         return;
       } else if (this.extraLives === 0) {
+        document.removeEventListener("keydown", keydownHandler);
         setTimeout(() => {
           textAlert.update("GAME OVER");
           setTimeout(() => {
@@ -97,7 +108,10 @@ class Engine {
     document.removeEventListener("keydown", this.playAgain);
     console.log(this.extraLives);
     this.extraLives = this.extraLives - 1;
-    this.playerChar.classList.remove("death-anim");
-    this.gameLoop();
+    setTimeout(() => {
+      document.addEventListener("keydown", keydownHandler);
+      this.playerChar.classList.remove("death-anim");
+      this.gameLoop();
+    }, 500);
   };
 }

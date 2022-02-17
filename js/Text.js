@@ -14,8 +14,10 @@ class Text {
     div.style.position = "absolute";
     div.style.left = xPos;
     div.style.top = yPos;
-    div.style.color = "white";
-    div.style.font = "40px 'Press Start 2P', cursive";
+    div.style.color = "#F246F2";
+    // div.style.backgroundColor = "#55FFFF";
+    div.style.padding = "10px 0px";
+    div.style.font = "30px 'Press Start 2P', cursive";
     div.style.zIndex = 90;
     div.style.transform = "translateX(-50%) translateY(-53.8%)";
     div.style.textAlign = "center";

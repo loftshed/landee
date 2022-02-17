@@ -36,6 +36,9 @@ body {
   filter: blur(1px);
 }
 
+.info-overlay {
+}
+
 .game-area-overlay {
   transition: all ease 0.3s;
   background-image: repeating-radial-gradient(
