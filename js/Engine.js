@@ -50,8 +50,10 @@ class Engine {
     const textAlert = new Text(this.root, "50%", "50%");
     gameBg.src = "assets/bg.png";
     this.titleTheme.pause();
-    this.start.volume = 0.2;
-    this.start.play();
+    this.start.volume = 0.2; // this wasn't meant to play over and over, but
+    this.start.play(); // it kind of sounds like it was supposed to
+    // be like that... so i'm going with it
+
     this.root.removeChild(textAlertNode);
     this.gameTheme.play();
     this.gameTheme.volume = 0.5;
