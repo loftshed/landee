@@ -2,6 +2,7 @@ body {
   margin: 0;
   display: flex;
   background-color: #adb5bd;
+  user-select: none;
 }
 
 .absolute-center {
@@ -16,6 +17,17 @@ body {
   z-index: -3;
   transform: translateX(-590px) translateY(285px);
   filter: blur(1px);
+}
+
+.remote {
+  transform: translateX(300px) translateY(425px);
+}
+
+.remote-mask {
+  width: 380;
+  transform: translateX(300px) translateY(425px);
+  z-index: 1000;
+  opacity: 0;
 }
 
 .game-border {

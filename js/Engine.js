@@ -7,11 +7,18 @@ class Engine {
     this.player = new Player(this.root); // creates player in root, see player.js
     this.enemies = []; // sets this.enemies to blank array
     this.extraLives = 3;
+    this.gameAreaOverlay = document.getElementById("game-area-overlay");
+    this.gameAreaOverlay2 = document.getElementById("game-area-overlay2");
     this.playerChar = document.getElementById("player-character");
+    this.gameTheme = document.getElementById("game-theme");
+    this.tvStatic = document.getElementById("tv-static");
+    this.tvOn = document.getElementById("tv-static");
     addBackground(this.root); // adds background image
   }
 
   firstRun = () => {
+    this.gameTheme.play();
+    this.gameTheme.volume = 0;
     const textAlert = new Text(this.root, "50%", "50%");
     textAlert.update(`PRESS ANY KEY\nTO START`);
     this.playerChar.style.display = "none";
@@ -23,6 +30,7 @@ class Engine {
     const textAlertNode = document.getElementById("text-alert");
     const textAlert = new Text(this.root, "50%", "50%");
     this.root.removeChild(textAlertNode);
+    this.gameTheme.volume = 0.3;
 
     if (this.lastFrame === undefined) {
       this.lastFrame = new Date().getTime();
@@ -45,21 +53,22 @@ class Engine {
     } // while there are less enemies than max onscreen enemies (defined in data.js),
 
     if (this.isPlayerDead()) {
-      const gameAreaOverlay = document.getElementById("game-area-overlay");
-      const gameAreaOverlay2 = document.getElementById("game-area-overlay2");
+      // const gameAreaOverlay = document.getElementById("game-area-overlay");
+      // const gameAreaOverlay2 = document.getElementById("game-area-overlay2");
       document.removeEventListener("keydown", this.gameLoop);
       this.playerChar.classList.add("death-anim");
 
       if (this.extraLives > 0) {
         document.removeEventListener("keydown", keydownHandler);
         setTimeout(() => {
+          this.gameTheme.volume = 0.1;
           if (this.extraLives > 1) {
             textAlert.update(
-              `U DED.\n${this.extraLives} LIVES REMAINING\n\nPRESS ANY KEY TO\nSTART NEXT ROUND`
+              `${this.extraLives} LIVES REMAINING\n\nPRESS ANY KEY TO\nSTART NEXT ROUND`
             );
           } else {
             textAlert.update(
-              `U DED.\n${this.extraLives} LIFE REMAINING\n\nPRESS ANY KEY TO\nSTART NEXT ROUND`
+              `${this.extraLives} LIFE REMAINING\n\nPRESS ANY KEY TO\nSTART NEXT ROUND`
             );
           }
         }, 500);
@@ -69,19 +78,32 @@ class Engine {
       } else if (this.extraLives === 0) {
         document.removeEventListener("keydown", keydownHandler);
         setTimeout(() => {
+          this.gameTheme.volume = 0.1;
           textAlert.update("GAME OVER");
           setTimeout(() => {
-            gameAreaOverlay.style.opacity = "100%";
-            gameAreaOverlay2.style.display = "inline";
+            this.gameTheme.volume = 0;
+            this.tvStatic.play();
+            this.tvStatic.volume = 0.3;
+            this.gameAreaOverlay.style.opacity = "100%";
+            this.gameAreaOverlay2.style.background = "";
+            this.gameAreaOverlay2.style.display = "inline";
             setTimeout(() => {
-              gameAreaOverlay.style.transform =
+              this.gameAreaOverlay.style.transform =
                 "scale(0.1) translatex(-637%) translatey(-538%)";
-              gameAreaOverlay.style.borderRadius = "25%";
-              gameAreaOverlay.style.filter = "blur(1px) brightness: 5000%";
+              this.gameAreaOverlay.style.borderRadius = "25%";
+              this.gameAreaOverlay.style.filter = "blur(1px) brightness: 5000%";
+              setInterval(() => {
+                if (this.tvStatic.volume >= 0.01) {
+                  this.tvStatic.volume -= 0.01;
+                } else {
+                  clearInterval();
+                }
+              }, 2);
+              this.tvStatic.volume = 0;
               setTimeout(() => {
-                gameAreaOverlay.style.opacity = "0%";
+                this.gameAreaOverlay.style.opacity = "0%";
               }, 1000);
-            }, 1000);
+            }, 3000);
           }, 2000);
         }, 500);
         return;

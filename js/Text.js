@@ -1,16 +1,6 @@
-// probably to bring up a game over message and a start again button
-
 class Text {
-  // takes page root & desired x/y pos
   constructor(root, xPos, yPos) {
-    // this.root = root;  <<
-    // this.xPos = xPos;  <<   necessary ???
-    // this.yPos = yPos;  <<
-
-    // creating our text element & applying attributes
-
     const div = document.createElement("div");
-
     div.style.position = "absolute";
     div.style.left = xPos;
     div.style.top = yPos;
@@ -26,10 +16,9 @@ class Text {
 
     root.appendChild(div);
 
-    this.domElement = div; // allows us to refer back to the element later as this.domElement
+    this.domElement = div;
   }
 
-  // updates text in element
   update(txt) {
     this.domElement.innerText = txt;
   }

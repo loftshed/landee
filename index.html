@@ -8,6 +8,15 @@
     />
   </head>
   <body>
+    <audio loop id="game-theme">
+      <source src="assets/eb-happyhappyblue.mp3" type="audio/mpeg" />
+    </audio>
+    <audio loop id="tv-static">
+      <source src="assets/pink_noise.wav" type="audio/wav" />
+    </audio>
+    <audio loop id="tv-on">
+      <source src="assets/tv-on.wav" type="audio/wav" />
+    </audio>
     <div class="page-container">
       <div id="page-background" class="page-background"></div>
       <div
@@ -26,6 +35,30 @@
       </div>
     </div>
     <img src="assets/table.png" id="table" class="table absolute-center" />
+    <img src="assets/remote.png" id="remote" class="remote absolute-center" />
+
+    <svg
+      class="remote-mask absolute-center"
+      id="remote-mask"
+      data-name="Layer 2"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 383.08 367.19"
+    >
+      <defs>
+        <style>
+          .cls-1 {
+            stroke: #fff;
+            stroke-miterlimit: 10;
+            cursor: pointer;
+            pointer-events: fill;
+          }
+        </style>
+      </defs>
+      <polygon
+        class="cls-1"
+        points="0.5 107.56 167.5 366.56 343.5 288.56 356.5 277.56 368.5 270.56 382.5 225.56 370.5 215.56 196.5 40.56 196.5 32.56 156.5 0.56 8.5 47.56 0.5 63.56 0.5 107.56"
+      />
+    </svg>
     <script src="js/data.js"></script>
     <script src="js/Enemy.js"></script>
     <script src="js/Text.js"></script>

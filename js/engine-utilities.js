@@ -44,3 +44,10 @@ const addBackground = (root) => {
   gameAreaOverlay2.style.width = `${GAME_WIDTH}px`;
   gameAreaOverlay2.style.height = `${GAME_HEIGHT}px`;
 };
+
+// audio = (source, id) => {
+//   const newAudio = document.createElement("audio");
+//   newAudio.src = source;
+//   newAudio.id = id;
+//   document.body.appendChild(newAudio);
+// };
