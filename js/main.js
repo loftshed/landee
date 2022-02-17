@@ -1,3 +1,6 @@
+// couple of zoom settings until i get the styling totally down
+document.body.style.zoom = "67%";
+
 // creates a new instance of engine class with id "app"
 
 const gameEngine = new Engine(document.getElementById("app"));
