@@ -5,7 +5,7 @@ class Enemy {
     this.root = theRoot; // recorded so we can use removeChild to 86 the enemy later on
     this.spot = enemySpot; // takes spot from constructor arg to place enemy in
     this.x = enemySpot * ENEMY_WIDTH; // x pos of enemy determined by its spot and width. it is made a property so two enemies don't spawn in the same spot.
-    this.y = -ENEMY_HEIGHT; // y pos begins at -enemy_height so they spawn above play area
+    this.y = -ENEMY_HEIGHT + 15; // y pos begins at -enemy_height so they spawn above play area
     // then later this.y is used to make the enemy fall
     this.destroyed = false; // this.destroyed declared, beginning as false
     // once true the enemy will be removed from play
