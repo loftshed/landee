@@ -4,7 +4,7 @@ class Text {
     div.style.position = "absolute";
     div.style.left = xPos;
     div.style.top = yPos;
-    div.style.color = "#F246F2";
+    div.style.color = "#56ffff";
     // div.style.backgroundColor = "#55FFFF";
     div.style.padding = "10px 0px";
     div.style.font = "30px 'Press Start 2P', cursive";

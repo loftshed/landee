@@ -7,15 +7,24 @@ const gameAreaOverlay2 = document.getElementById("game-area-overlay2");
 const tvStatic = document.getElementById("tv-static");
 const tvOn = document.getElementById("tv-on");
 const testTone = document.getElementById("test-tone");
+const blip = document.getElementById("blip");
+let gameStarted = undefined;
 
 // tells the game what to do when keydown event is detected
+blip.volume = 0.1;
 const keydownHandler = (event) => {
   // checks event code and calls appropriate function inPlayer.js
   if (event.code === "ArrowLeft") {
     gameEngine.player.moveLeft();
+    if (gameStarted === true) {
+      blip.play();
+    }
   }
   if (event.code === "ArrowRight") {
     gameEngine.player.moveRight();
+    if (gameStarted === true) {
+      blip.play();
+    }
   }
 };
 
@@ -61,6 +70,7 @@ turnOn = () => {
       setTimeout(() => {
         testTone.pause();
         gameAreaOverlay2.style.display = "none";
+        gameStarted = true;
         gameEngine.firstRun();
       }, 250);
     }, 500);
