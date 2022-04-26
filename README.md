@@ -1,6 +1,6 @@
-> > > > > > > > > > # LAND-EE
+> # LAND-EE
 
-## **Land-ee** is deployed and playable at https://nifty-cray-f32f34.netlify.app/
+### **Land-ee** is deployed and playable at https://nifty-cray-f32f34.netlify.app/
 
 Best viewed in Google Chrome as some other browsers will break the styling ... \* _glares at Firefox_ 😒 \*
 
