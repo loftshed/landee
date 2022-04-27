@@ -8,6 +8,6 @@ An object-oriented programming game project produced as part of the Concordia Bo
 
 ## Demo available in higher quality (and with sound!) on YouTube https://youtu.be/UmsYJKnLwSs
 
-<img src="./readme_images/01-landee.gif" />
+![land-ee gif](/readme_images/01-landee.gif)
 
 > ##### (The original requirements of this project are detailed in full in ORIGINAL_README.md)
